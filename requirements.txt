@@ -1,0 +1,3 @@
+telethon  # telegram interactions
+pillow  # image processing
+imagehash  # image comparing
