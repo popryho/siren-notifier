@@ -1,6 +1,7 @@
 import argparse
 import asyncio
 import hashlib
+import imghdr
 import json
 import logging
 import os
@@ -108,6 +109,10 @@ async def work(client):
         @client.on(events.NewMessage(chats=channel_entity))
         async def handler(event):
             await event.download_media('temp.jpg')
+            
+            if not imghdr.what('temp.jpg') == 'jpeg':
+                logging.info(f"file type is: {imghdr.what('temp.jpg')}")
+                return
             img: Image = Image.open('temp.jpg')
 
             if are_two_images_equal(alarm_on, img, cutoff=5):
